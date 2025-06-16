@@ -1,23 +1,12 @@
-import { BrowserRouter, Routes } from 'react-router-dom'
-import './App.css'
-import MenuLateral from './components/menu-lateral'
+import "./App.css";
+import LateralNav from "./components/menu-lateral";
 
 function App() {
-
   return (
     <>
-      <BrowserRouter>
-            <MenuLateral />
-
-        <Routes>
-          {/* <Route path="/" element={<Home />} />
-          <Route path="/associados" element={<AssociadosPage />} />
-          <Route path="/pautas" element={<PautasPage />} />
-          <Route path="/sessoes" element={<SessaoPage />} /> */}
-        </Routes>
-      </BrowserRouter>
+      <LateralNav />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
