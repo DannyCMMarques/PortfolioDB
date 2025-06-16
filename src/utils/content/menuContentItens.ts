@@ -1,9 +1,7 @@
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaVoteYea } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
-import { SiSessionize } from "react-icons/si";
 import { TfiAgenda } from "react-icons/tfi";
 import type { MenuItem } from "../interfaces/MenuContentInterface";
-
 const menuContentItens: MenuItem[] = [
   {
     id: 1,
@@ -23,7 +21,7 @@ const menuContentItens: MenuItem[] = [
     id: 3,
     label: "Sessões",
     link: "/sessoes",
-    icon: SiSessionize,
+    icon: FaVoteYea,
     active: false,
   },
   {
