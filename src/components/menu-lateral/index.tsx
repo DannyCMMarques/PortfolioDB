@@ -51,7 +51,7 @@ const LateralNav = () => {
                 <img
                     src="/src/assets/logo.png"
                     alt="Logo"
-                    className={`transition-all duration-500 ease-in-out ${collapsed ? "w-28" : "w-32"
+                    className={`transition-all duration-500 ease-in-out ${collapsed ? "w-" : "w-32"
                         }`}
                 />
             </div>
