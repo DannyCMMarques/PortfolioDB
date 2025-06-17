@@ -3,8 +3,6 @@ import { LuAlarmClock, LuCalendarClock } from "react-icons/lu";
 import TagStatus from "../tags";
 import type { CardsProps } from "../interfaces/CardsProps";
 
-
-
 const Cards = ({
     icon,
     descricao,
@@ -43,14 +41,18 @@ const Cards = ({
                 </div>
                 {isSessao && pautaTitulo && (
                     <div className="flex items-center gap-2 mt-2">
-
                         <IoNewspaper className="text-black" />
-                        <p className="text-sm text-gray-600">
-                            Pauta: {pautaTitulo}</p>
+                        <p className="text-sm text-gray-600">Pauta: {pautaTitulo}</p>
                     </div>
-
                 )}
-                {descricao && <p className="text-sm text-gray-600 mt-1">{descricao}</p>}
+                {descricao && (
+                    <p
+                        className="text-sm break-words
+ text-gray-600 mt-1"
+                    >
+                        {descricao}
+                    </p>
+                )}
 
                 {duracao && (
                     <div className="flex items-center gap-2 mt-2">
@@ -66,21 +68,29 @@ const Cards = ({
                     <div className="flex items-start gap-2 mt-2">
                         <LuCalendarClock className="text-black mt-[2px]" />
                         <p className="text-sm text-gray-600">
-                            <span className="text-bold  text-gray-700">Início: </span> {horarioInicio}
+                            <span className="text-bold  text-gray-700">Início: </span>{" "}
+                            {horarioInicio}
                             {horarioFim && (
                                 <span>
                                     {" "}
-                                    -<span className="text-bold  text-gray-700"> Fim: </span> {horarioFim}
+                                    -<span className="text-bold  text-gray-700"> Fim: </span>{" "}
+                                    {horarioFim}
                                 </span>
                             )}
                         </p>
                     </div>
                 )}
             </div>
-
-            <div className="mt-auto pt-2 flex gap-2 flex-wrap">
-                <TagStatus cor={corTag(status)} texto={status} />
-                {resultado && <TagStatus cor={corTag(resultado)} texto={resultado} />}
+            <div className="mt-auto pt-2 flex justify-between">
+                <div className="flex gap-2 flex-wrap">
+                    <TagStatus cor={corTag(status)} texto={status} />
+                    {resultado && <TagStatus cor={corTag(resultado)} texto={resultado} />}
+                </div>
+                <div>
+                    <p className="text-[12px] text-indigo-700 hover:cursor-pointer font-bold hover:underline">
+                        Ver Mais
+                    </p>
+                </div>
             </div>
         </div>
     );
