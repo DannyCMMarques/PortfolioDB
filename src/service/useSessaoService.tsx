@@ -1,0 +1,79 @@
+
+import type {
+    SessaoRequestDTO,
+    SessaoResponseDTO,
+    SessaoIniciadaResponseDTO,
+    SessaoPage,
+    SessaoIniciadaPage
+} from "./interfaces/interfaceSessao";
+import type { VotoRequestDTO, VotoResponseDTO } from "./interfaces/interfaceVotacao";
+
+import useApiInterceptor from "./useApiInterceptor";
+
+
+function useSessaoService() {
+    const api = useApiInterceptor();
+    const url = "/api/v1/sessao";
+
+    async function cadastrarSessao(
+        sessao: SessaoRequestDTO
+    ): Promise< SessaoResponseDTO> {
+        const response = await api.post<SessaoResponseDTO | SessaoIniciadaResponseDTO>(url, sessao);
+        return response.data;
+    }
+
+    async function getSessaoById(id: number): Promise<SessaoResponseDTO | SessaoIniciadaResponseDTO> {
+        const response = await api.get<SessaoResponseDTO | SessaoIniciadaResponseDTO>(`${url}/${id}`);
+        return response.data;
+    }
+
+    async function listarSessao(
+        page: number = 1,
+        size: number = 10,
+        sortBy: string = "titulo",
+        direction: "asc" | "desc" = "desc"
+    ): Promise<SessaoPage | SessaoIniciadaPage> {
+        const response = await api.get<SessaoPage | SessaoIniciadaPage>(url, {
+            params: { page, size, sortBy, direction },
+        });
+        return response.data;
+    }
+
+    async function atualizarSessao(
+        id: number,
+        sessao: SessaoRequestDTO
+    ): Promise<SessaoResponseDTO | SessaoIniciadaResponseDTO> {
+        const response = await api.put<SessaoResponseDTO | SessaoIniciadaResponseDTO>(`${url}/${id}`, sessao);
+        return response.data;
+    }
+
+    async function deletarSessao(id: number): Promise<void> {
+        await api.delete<void>(`${url}/${id}`);
+    }
+
+
+    async function iniciarSessao(id: number): Promise<SessaoIniciadaResponseDTO> {
+        const response = await api.post<SessaoIniciadaResponseDTO>(`${url}/${id}/start`);
+        return response.data;
+    }
+
+    async function votarSessao(
+        id: number,
+        voto: VotoRequestDTO
+    ): Promise<VotoResponseDTO> {
+        const response = await api.post<VotoResponseDTO>(`${url}/${id}/votar`, voto);
+        return response.data;
+    }
+
+    return {
+        cadastrarSessao,
+        getSessaoById,
+        listarSessao,
+        atualizarSessao,
+        deletarSessao,
+        iniciarSessao,
+        votarSessao,
+    };
+}
+
+export default useSessaoService;
