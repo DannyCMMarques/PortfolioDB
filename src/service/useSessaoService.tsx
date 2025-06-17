@@ -1,10 +1,10 @@
 
 import type {
-    SessaoRequestDTO,
-    SessaoResponseDTO,
+    SessaoIniciadaPage,
     SessaoIniciadaResponseDTO,
     SessaoPage,
-    SessaoIniciadaPage
+    SessaoRequestDTO,
+    SessaoResponseDTO
 } from "./interfaces/interfaceSessao";
 import type { VotoRequestDTO, VotoResponseDTO } from "./interfaces/interfaceVotacao";
 
@@ -30,7 +30,7 @@ function useSessaoService() {
     async function listarSessao(
         page: number = 1,
         size: number = 10,
-        sortBy: string = "titulo",
+        sortBy: string = "id",
         direction: "asc" | "desc" = "desc"
     ): Promise<SessaoPage | SessaoIniciadaPage> {
         const response = await api.get<SessaoPage | SessaoIniciadaPage>(url, {
