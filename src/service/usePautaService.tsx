@@ -21,7 +21,7 @@ function usePautaService() {
         return response.data;
     }
 
-    async function getPautaById(id: number): Promise<PautaResponseDTO | PautaResultadoDTO> {
+    async function getById(id: number): Promise<PautaResponseDTO | PautaResultadoDTO> {
         const response = await api.get<PautaResponseDTO | PautaResultadoDTO>(`${url}/${id}`);
         return response.data;
     }
@@ -52,7 +52,7 @@ function usePautaService() {
 
     return {
         cadastrarPauta,
-        getPautaById,
+        getById,
         listarPauta,
         atualizarPautas,
         deletarPauta,

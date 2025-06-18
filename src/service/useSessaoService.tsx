@@ -22,7 +22,7 @@ function useSessaoService() {
         return response.data;
     }
 
-    async function getSessaoById(id: number): Promise<SessaoResponseDTO | SessaoIniciadaResponseDTO> {
+    async function getById(id: number): Promise<SessaoResponseDTO | SessaoIniciadaResponseDTO> {
         const response = await api.get<SessaoResponseDTO | SessaoIniciadaResponseDTO>(`${url}/${id}`);
         return response.data;
     }
@@ -67,7 +67,7 @@ function useSessaoService() {
 
     return {
         cadastrarSessao,
-        getSessaoById,
+        getById,
         listarSessao,
         atualizarSessao,
         deletarSessao,
