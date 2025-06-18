@@ -11,7 +11,6 @@ import type {
 import useSessaoService from "../../service/useSessaoService";
 import { handleStatus } from "../../utils/helper/StatusUtils";
 
-// ✅ Type Guard
 function isSessaoIniciadaPage(
     page: SessaoIniciadaPage | SessaoPage
 ): page is SessaoIniciadaPage {

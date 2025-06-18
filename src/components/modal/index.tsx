@@ -38,20 +38,6 @@ const Modal = ({
                 <div>
                     {children}
                 </div>
-
-                {/* <div className="flex items-center mb-4 space-x-3">
-                    {icone && (
-                        <div className="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center text-lg">
-                            {icone}
-                        </div>
-                    )}
-                    <div className="flex flex-col">
-                        <h2 className="text-lg font-bold text-gray-800">{titulo}</h2>
-                        {subtitulo && <p className="text-sm text-gray-500">{subtitulo}</p>}
-                    </div>
-                </div>
-
-                <div className="text-sm text-gray-700">{children}</div> */}
             </div>
         </div>
     );
