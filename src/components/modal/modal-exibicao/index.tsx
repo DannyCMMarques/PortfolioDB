@@ -5,9 +5,10 @@ import VisualizarData from "../../visualizar-Pauta/Index";
 interface ModalVisualizarDataProps {
   id: number;
   children: React.ReactNode;
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
-const ModalVisualizarData = ({ id, children }: ModalVisualizarDataProps) => {
+const ModalVisualizarData = ({ id, children,size }: ModalVisualizarDataProps) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -23,7 +24,7 @@ const ModalVisualizarData = ({ id, children }: ModalVisualizarDataProps) => {
       </button>
 
       {open && (
-        <Modal onFechar={handleClose} tamanho="lg">
+        <Modal onFechar={handleClose} tamanho={size}>
           <VisualizarData id={id} />
         </Modal>
       )}

@@ -1,6 +1,6 @@
-import type { PautaResponseDTO, PautaResultadoDTO } from "../../service/interfaces/interfacePauta";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import type { PautaResponseDTO, PautaResultadoDTO } from "../../service/interfaces/interfacePauta";
 import type { SessaoResponseDTO } from '../../service/interfaces/interfaceSessao';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -38,13 +38,13 @@ const GraficoVotos = ({ data, titulo, isSessao }: GraficoVotosProps) => {
     };
 
     return (
-        <div className="mt-6">
+        <div className="mt-6 w-full">
             <h3 className="text-sm font-bold text-center text-gray-800 mb-2">{titulo}</h3>
 
             {votosFavor === 0 && votosContra === 0 ? (
                 <p className="font-bold text-gray-600 text-center text-xs">Ainda não há votos</p>
             ) : (
-                <div className="w-80 flex m-auto">
+                <div className=" flex justify-center m-auto md:w-64">
                     <Pie data={configGrafico} />
                 </div>
             )}
