@@ -26,17 +26,20 @@ function usePautaService() {
         return response.data;
     }
 
-    async function listarPauta(
-        page: number = 1,
-        size: number = 10,
-        sortBy: string = "titulo",
-        direction: "asc" | "desc" = "desc"
-    ): Promise<PautaPage| PautaResultadoPage> {
-        const response = await api.get<PautaPage|PautaResultadoPage>(url, {
-            params: { page, size, sortBy, direction },
-        });
-        return response.data;
-    }
+   async function listarPauta(
+    page: number = 1,
+    size: number = 10,
+    sortBy: string = "titulo",
+    direction: "asc" | "desc" = "desc",
+    titulo?: string,
+    status?: string
+): Promise<PautaPage | PautaResultadoPage> {
+    const response = await api.get<PautaPage | PautaResultadoPage>(url, {
+        params: { page, size, sortBy, direction, titulo, status },
+    });
+    return response.data;
+}
+
 
     async function atualizarPautas(
         id: number,

@@ -1,47 +1,39 @@
 import { useCallback, useEffect, useState } from "react";
 import { FaVoteYea } from "react-icons/fa";
+import { IoAddCircleOutline } from "react-icons/io5";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import Cards from "../../components/cards/Cards";
 import ContainerComponent from "../../components/container";
+import FormularioSessao from "../../components/form/form_sessao";
+import Modal from "../../components/modal";
 import Paginador from "../../components/paginador";
-import type {
-    SessaoIniciadaPage,
-    SessaoIniciadaResponseDTO,
-    SessaoPage,
-} from "../../service/interfaces/interfaceSessao";
+import VisualizarData from "../../components/visualizar-Pauta/Index";
+import type { SessaoPage, SessaoResponseDTO } from "../../service/interfaces/interfaceSessao";
 import useSessaoService from "../../service/useSessaoService";
 import { handleStatus } from "../../utils/helper/StatusUtils";
 
-function isSessaoIniciadaPage(
-    page: SessaoIniciadaPage | SessaoPage
-): page is SessaoIniciadaPage {
-    return (
-        page.content.length > 0 &&
-        "horarioInicio" in page.content[0] &&
-        "votos" in page.content[0]
-    );
-}
+type ModalState = {
+    tipo: 'formulario' | 'resultado' | null;
+    id?: number | null;
+};
 
-const SessaoPage = () => {
+const SessaoPageView = () => {
     const sessaoService = useSessaoService();
-    const [sessoes, setSessoes] = useState<SessaoIniciadaResponseDTO[]>([]);
+    const [sessoes, setSessoes] = useState<SessaoResponseDTO[]>([]);
     const [pagina, setPagina] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [modal, setModal] = useState<ModalState>({ tipo: null, id: null });
     const size = 10;
 
     const exibirSessoes = useCallback(async (page = 1) => {
         setIsLoading(true);
         try {
-            const response = await sessaoService.listarSessao(page, size);
-
-            if (isSessaoIniciadaPage(response)) {
-                setSessoes(response.content);
-                setTotalPages(response.totalPages);
-            } else {
-                console.error("Resposta não é SessaoIniciadaPage.");
-            }
+            const response: SessaoPage = await sessaoService.listarSessao(page, size);
+            setSessoes(response.content);
+            setTotalPages(response.totalPages);
         } catch (err) {
-            console.error("Erro ao buscar sessões:", err);
+            console.log(err);
         } finally {
             setIsLoading(false);
         }
@@ -49,19 +41,69 @@ const SessaoPage = () => {
 
     useEffect(() => {
         exibirSessoes(pagina);
-    }, [pagina, size]);
+    }, [pagina]);
+
+    const abrirModal = (tipo: 'formulario' | 'resultado', id?: number) => {
+        setModal({ tipo, id: id ?? null });
+    };
+
+    const fecharModal = () => {
+        setModal({ tipo: null, id: null });
+    };
+
+    const onDelete = async (id: number) => {
+        try {
+            await sessaoService.deletarSessao(id);
+            toast.success("Sessão excluída com sucesso");
+            exibirSessoes(pagina);
+        } catch (err) {
+            toast.error(err.response?.data?.message || "Erro ao deletar sessão");
+        }
+    };
 
     return (
-        <div className="items-center m-auto p-auto">
-            <div>
-                <p className="text-start font-bold text-3xl">Sessão</p>
-            </div>
+        <main className="px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
+            <ToastContainer position="top-right" autoClose={5000} theme="colored" transition={Bounce} />
+
+            {modal.tipo === "resultado" && modal.id != null && (
+                <Modal onFechar={fecharModal} tamanho="md">
+                    <VisualizarData id={modal.id} />
+                </Modal>
+            )}
+
+            {modal.tipo === "formulario" && (
+                <Modal onFechar={fecharModal} tamanho="md">
+                    <FormularioSessao
+                        id={modal.id ?? undefined}
+                        handleClose={fecharModal}
+                        onSucesso={() => {
+                            exibirSessoes(pagina);
+                            fecharModal();
+                        }}
+                    />
+                </Modal>
+            )}
+
+            <section className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <div>
+                    <h1 className="text-2xl font-bold text-gray-900">Sessões de Votação</h1>
+                    <p className="text-sm text-gray-500">Gerencie as sessões vinculadas às pautas</p>
+                </div>
+
+                <button
+                    onClick={() => abrirModal("formulario")}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-indigo-700 transition"
+                >
+                    <IoAddCircleOutline className="text-lg" />
+                    Nova Sessão
+                </button>
+            </section>
 
             <ContainerComponent>
                 {isLoading ? (
                     <p className="text-sm text-gray-700">Carregando sessões...</p>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {sessoes.map((sessao) => (
                             <Cards
                                 key={sessao.id}
@@ -73,20 +115,25 @@ const SessaoPage = () => {
                                 horarioInicio={sessao.horarioInicio}
                                 horarioFim={sessao.horarioFim}
                                 isSessao={true}
+                                onEditar={(id) => abrirModal("formulario", id)}
+                                onExcluir={onDelete}
+                                onVerResultados={(id) => abrirModal("resultado", id)}
                             />
                         ))}
                     </div>
                 )}
             </ContainerComponent>
 
-            <Paginador
-                paginaAtual={pagina}
-                totalPaginas={totalPages}
-                totalItens={sessoes.length}
-                aoMudarPagina={setPagina}
-            />
-        </div>
+            <div className="mt-10">
+                <Paginador
+                    paginaAtual={pagina}
+                    totalPaginas={totalPages}
+                    totalItens={sessoes.length}
+                    aoMudarPagina={setPagina}
+                />
+            </div>
+        </main>
     );
 };
 
-export default SessaoPage;
+export default SessaoPageView;

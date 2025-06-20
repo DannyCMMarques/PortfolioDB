@@ -12,4 +12,7 @@ export interface CardsProps {
     isSessao?: boolean;
     pautaTitulo?: string;
     id?: number;
+    onEditar?: (id: number) => void;
+    onExcluir?: (id: number) => void;
+    onVerResultados?: (id: number) => void;
 }
