@@ -19,7 +19,7 @@ function useAssociadoService() {
         return response.data;
     }
 
-    async function getAssociadoById(id: number): Promise<AssociadoResponseDTO> {
+    async function getById(id: number): Promise<AssociadoResponseDTO> {
         const response = await api.get<AssociadoResponseDTO >(`${url}/${id}`);
         return response.data;
     }
@@ -50,7 +50,7 @@ function useAssociadoService() {
 
     return {
         cadastrarAssociado,
-        getAssociadoById,
+        getById,
         listarAssociado,
         atualizarAssociado,
         deletarAssociado,

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { IoNewspaper } from "react-icons/io5";
 import Cards from "../../components/cards/Cards";
 import ContainerComponent from "../../components/container";
+import Paginador from "../../components/paginador";
 import type {
     PautaPage,
     PautaResponseDTO,
@@ -22,7 +23,7 @@ const PautasPage = () => {
         if (texto.length <= limite) return texto;
         return texto.slice(0, limite - 3).trim() + "...";
     };
-    const exibirPosts = useCallback(
+    const exibirPautas = useCallback(
         async (page = 1) => {
             setIsLoading(true);
             try {
@@ -30,11 +31,9 @@ const PautasPage = () => {
                     page,
                     size
                 );
-                console.log(pautasData);
                 setPautas(pautasData?.content);
-                console.log(pautas);
                 setTotalPages(pautasData.totalPages);
-                console.log(totalPages);
+                console.log("eu sou total paginas",totalPages);
             } catch (err) {
                 console.error("Erro ao buscar itens:", err);
             } finally {
@@ -44,11 +43,11 @@ const PautasPage = () => {
         [pautasService]
     );
     useEffect(() => {
-        exibirPosts(pagina);
+        exibirPautas(pagina);
     }, [pagina, size]);
 
     return (
-        <div className="items-center m-auto p-auto">
+        <div className="items-center mt-auto pt-auto">
             <div>
                 <p className="text-start font-bold text-3xl">Pautas</p>
             </div>
@@ -61,10 +60,21 @@ const PautasPage = () => {
                             descricao={handleResumo(pauta.descricao)}
                             icon={<IoNewspaper />}
                             status={handleStatus(pauta.status)}
+                            id={pauta.id}
+
                         />
                     ))}
                 </div>
             </ContainerComponent>
+
+            <div>
+                <Paginador
+                    paginaAtual={pagina}
+                    totalPaginas={totalPages}
+                    totalItens={pautas.length}
+                    aoMudarPagina={setPagina}
+                />
+            </div>
         </div>
     );
 };

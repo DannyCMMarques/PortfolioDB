@@ -11,5 +11,5 @@ export interface CardsProps {
     duracao?: number;
     isSessao?: boolean;
     pautaTitulo?: string;
-    idSessao?: number;
+    id?: number;
 }
