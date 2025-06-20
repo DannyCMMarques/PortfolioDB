@@ -12,7 +12,7 @@ const TagStatus = ({ cor, texto }: TagStatusProps) => {
 
     return (
         <span
-            className={`text-xs font-semibold px-3 py-1 rounded-full inline-block ${coresClasses[cor]}`}
+            className={`text-[11px] font-semibold px-1 py-[2px] rounded-full inline-block ${coresClasses[cor]}`}
         >
             {texto}
         </span>
