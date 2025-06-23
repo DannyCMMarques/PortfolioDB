@@ -15,4 +15,6 @@ export interface CardsProps {
     onEditar?: (id: number) => void;
     onExcluir?: (id: number) => void;
     onVerResultados?: (id: number) => void;
+    onIniciarSessao?:(id:number) =>void;
+    onParticiparSessao?:(id:number) => void;
 }
