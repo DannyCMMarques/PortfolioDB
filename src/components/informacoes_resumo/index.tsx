@@ -40,7 +40,7 @@ const InformacaoResumo = ({
             )}
 
             {descricao && (
-                <p className="text-sm break-words text-gray-600 mt-1 ml-6">
+                <p className="text-sm sm: text-md break-words text-gray-600 mt-1 ml-6">
                     <span className="font-bold">Descrição:</span> {descricao}
                 </p>
             )}

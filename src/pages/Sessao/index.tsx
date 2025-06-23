@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { FaVoteYea } from "react-icons/fa";
 import { IoAddCircleOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import Cards from "../../components/cards/Cards";
 import ContainerComponent from "../../components/container";
 import FormularioSessao from "../../components/form/form_sessao";
+import Loading from "../../components/loading";
 import Modal from "../../components/modal";
 import Paginador from "../../components/paginador";
-import VisualizarData from "../../components/visualizar-Pauta/Index";
+import VisualizarSessao from "../../components/visualizar-dados-sessao";
 import type { SessaoPage, SessaoResponseDTO } from "../../service/interfaces/interfaceSessao";
 import useSessaoService from "../../service/useSessaoService";
 import { handleStatus } from "../../utils/helper/StatusUtils";
@@ -19,11 +21,13 @@ type ModalState = {
 
 const SessaoPageView = () => {
     const sessaoService = useSessaoService();
+    const navigate = useNavigate();
     const [sessoes, setSessoes] = useState<SessaoResponseDTO[]>([]);
     const [pagina, setPagina] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState<ModalState>({ tipo: null, id: null });
+    const [ totalItens,setTotalItens] = useState<number>(0);
     const size = 10;
 
     const exibirSessoes = useCallback(async (page = 1) => {
@@ -32,8 +36,10 @@ const SessaoPageView = () => {
             const response: SessaoPage = await sessaoService.listarSessao(page, size);
             setSessoes(response.content);
             setTotalPages(response.totalPages);
+                        setTotalItens(response?.totalElements);
+
         } catch (err) {
-            console.log(err);
+            console.error(err);
         } finally {
             setIsLoading(false);
         }
@@ -61,13 +67,35 @@ const SessaoPageView = () => {
         }
     };
 
+    const iniciarSessao = async (id: number) => {
+        try {
+            await sessaoService.iniciarSessao(id);
+            exibirSessoes(pagina);
+
+        } catch (err) {
+            console.error("erro ao iniciar sessao", err)
+        }
+    };
+    const handleNavegarSessao = (id: number) => {
+        navigate(`/sessao/${id}`);
+
+    }
+    const handleIniciarSessao = async (id: number) => {
+        try {
+            await iniciarSessao(id);
+            handleNavegarSessao(id);
+        } catch (err) {
+            console.error("Erro ao iniciar sessão:", err);
+        }
+    }
+
     return (
-        <main className="px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
+        <main className=" sm:px-0 lg:px-8 py-8 min-h-screen">
             <ToastContainer position="top-right" autoClose={5000} theme="colored" transition={Bounce} />
 
             {modal.tipo === "resultado" && modal.id != null && (
-                <Modal onFechar={fecharModal} tamanho="md">
-                    <VisualizarData id={modal.id} />
+                <Modal onFechar={fecharModal} tamanho="lg">
+                    <VisualizarSessao id={modal.id} />
                 </Modal>
             )}
 
@@ -101,7 +129,7 @@ const SessaoPageView = () => {
 
             <ContainerComponent>
                 {isLoading ? (
-                    <p className="text-sm text-gray-700">Carregando sessões...</p>
+                    <Loading/>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {sessoes.map((sessao) => (
@@ -118,6 +146,8 @@ const SessaoPageView = () => {
                                 onEditar={(id) => abrirModal("formulario", id)}
                                 onExcluir={onDelete}
                                 onVerResultados={(id) => abrirModal("resultado", id)}
+                                onIniciarSessao={() => handleIniciarSessao(sessao.id)}
+                                onParticiparSessao={() => handleNavegarSessao(sessao.id)}
                             />
                         ))}
                     </div>
@@ -128,7 +158,7 @@ const SessaoPageView = () => {
                 <Paginador
                     paginaAtual={pagina}
                     totalPaginas={totalPages}
-                    totalItens={sessoes.length}
+                    totalItens={totalItens}
                     aoMudarPagina={setPagina}
                 />
             </div>

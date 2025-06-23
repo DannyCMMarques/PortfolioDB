@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import useSessaoService from "../../../service/useSessaoService";
 import type { PautaResponseDTO } from "../../../service/interfaces/interfacePauta";
 import type { SessaoRequestDTO } from "../../../service/interfaces/interfaceSessao";
-import { useFormularioEdicao } from "../../../hooks";
 import FormularioBase from "../formulario_base";
 
 
@@ -22,45 +21,34 @@ interface FormularioSessaoProps {
 const FormularioSessao = ({ id, handleClose, onSucesso }: FormularioSessaoProps) => {
     const sessaoService = useSessaoService();
     const [pautaSelecionada, setPautaSelecionada] = useState<PautaResponseDTO | null>(null);
-    const [codigoPauta, setCodigoPauta] = useState("");
 
-const schema = z.object({
-    idPauta: z.number({ required_error: "Digite o código da pauta" }),
-    duracao: z.number().min(1, "Duração deve ser maior que 0"),
-    unidade: z.enum(["SEG", "MIN", "H"]),
-});
+    const schema = z.object({
+        idPauta: z.number({ required_error: "Digite o código da pauta" }),
+        duracao: z.number().min(1, "Duração deve ser maior que 0"),
+        unidade: z.enum(["SEG", "MIN", "H"]),
+    });
     const {
         register,
         handleSubmit,
-        setValue,
-        reset,
+        watch,
         formState: { errors },
     } = useForm<SessaoRequestDTO>({
         resolver: zodResolver(schema),
-        defaultValues: {
-            duracao: 30,
-            unidade: "MIN",
+        defaultValues: async () => {
+            if (!id) return { duracao: 30, unidade: "MIN" } as SessaoRequestDTO;
+
+            const sessao = await sessaoService.getById(id);
+            setPautaSelecionada(sessao.pauta);
+
+            return {
+                idPauta: sessao.pauta.id,
+                duracao: sessao.duracao,
+                unidade: sessao.unidade as "SEG" | "MIN" | "H",
+            };
         },
     });
+    const codigoPauta = watch("idPauta") ?? "";
 
-    useFormularioEdicao({
-        id,
-        getById: sessaoService.getById,
-        reset,
-        onSetExtraState: (data) => {
-            setCodigoPauta(String(data.pauta.id));
-            setPautaSelecionada(data.pauta);
-        },
-    });
-
-    const handleCodigoPautaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setCodigoPauta(value);
-        const numeric = parseInt(value);
-        if (!isNaN(numeric)) {
-            setValue("idPauta", numeric);
-        }
-    };
 
     const onSubmit = async (data: SessaoRequestDTO) => {
         try {
@@ -92,12 +80,10 @@ const schema = z.object({
                     Código da Pauta
                 </label>
                 <input
-                    id="pauta-id"
                     type="text"
-                    value={codigoPauta}
-                    onChange={handleCodigoPautaChange}
+                    {...register("idPauta", { valueAsNumber: true })}
+                    className="w-full px-4 py-3 rounded-md border"
                     placeholder="Digite o código da pauta"
-                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-700"
                 />
                 {errors.idPauta && (
                     <p className="text-red-500 text-sm mt-1">{errors.idPauta.message}</p>
