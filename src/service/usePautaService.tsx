@@ -1,9 +1,9 @@
 
 import type {
+    PautaPage,
     PautaRequestDTO,
     PautaResponseDTO,
     PautaResultadoDTO,
-    PautaPage,
     PautaResultadoPage,
 } from "./interfaces/interfacePauta";
 
@@ -25,27 +25,34 @@ function usePautaService() {
         const response = await api.get<PautaResponseDTO | PautaResultadoDTO>(`${url}/${id}`);
         return response.data;
     }
+    async function listarPauta(
+        page: number = 1,
+        size: number = 10,
+        sortBy: string = "id",
+        direction: "asc" | "desc" = "desc",
+        titulo?: string,
+        status?: string
+    ): Promise<PautaPage | PautaResultadoPage> {
+        const response = await api.get<PautaPage | PautaResultadoPage>(url, {
+            params: {
+                page,
+                size,
+                sortBy,
+                direction,
+                ...(titulo && { titulo }),
+                ...(status && { status }),
+            },
+        });
 
-   async function listarPauta(
-    page: number = 1,
-    size: number = 10,
-    sortBy: string = "titulo",
-    direction: "asc" | "desc" = "desc",
-    titulo?: string,
-    status?: string
-): Promise<PautaPage | PautaResultadoPage> {
-    const response = await api.get<PautaPage | PautaResultadoPage>(url, {
-        params: { page, size, sortBy, direction, titulo, status },
-    });
-    return response.data;
-}
+        return response.data;
+    }
 
 
     async function atualizarPautas(
         id: number,
         pauta: PautaRequestDTO
     ): Promise<PautaResponseDTO | PautaResultadoDTO> {
-        const response = await api.put<PautaResponseDTO|PautaResultadoDTO>(`${url}/${id}`, pauta);
+        const response = await api.put<PautaResponseDTO | PautaResultadoDTO>(`${url}/${id}`, pauta);
         return response.data;
     }
 
