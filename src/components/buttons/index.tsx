@@ -17,7 +17,7 @@ interface BotaoStatusProps {
 }
 
 const estilos = {
-  cinza: "bg-gray-300 text-gray-700",
+  cinza: "bg-gray-300 text-gray-600",
   cinzaEscuro: "bg-gray-600 text-white",
   azul: "bg-blue-600 text-white",
   amarelo: "bg-yellow-100 text-yellow-900",
