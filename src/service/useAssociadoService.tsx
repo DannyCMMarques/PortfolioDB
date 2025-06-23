@@ -20,19 +20,27 @@ function useAssociadoService() {
     }
 
     async function getById(id: number): Promise<AssociadoResponseDTO> {
-        const response = await api.get<AssociadoResponseDTO >(`${url}/${id}`);
+        const response = await api.get<AssociadoResponseDTO>(`${url}/${id}`);
         return response.data;
     }
 
     async function listarAssociado(
         page: number = 1,
         size: number = 10,
-        sortBy: string = "titulo",
-        direction: "asc" | "desc" = "desc"
+        sortBy: string = "nome",
+        direction: "asc" | "desc" = "desc",
+        cpf?: string
     ): Promise<AssociadoPage> {
         const response = await api.get<AssociadoPage>(url, {
-            params: { page, size, sortBy, direction },
+            params: {
+                page,
+                size,
+                sortBy,
+                direction,
+                ...(cpf && { cpf }),
+            },
         });
+
         return response.data;
     }
 

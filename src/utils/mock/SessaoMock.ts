@@ -1,108 +1,77 @@
-import type { SessaoIniciadaResponseDTO } from "../../service/interfaces/interfaceSessao";
 
-export const sessoesMock: SessaoIniciadaResponseDTO[] = [
+import type {
+    SessaoIniciadaPage,
+    SessaoIniciadaResponseDTO,
+    SessaoPage,
+    SessaoRequestDTO,
+    SessaoResponseDTO,
+} from '../../service/interfaces/interfaceSessao';
+
+import { mockPautaResultados } from './PautaMock';
+import { mockVotos } from './VotoMock';
+
+
+export const mockSessaoRequest: SessaoRequestDTO = {
+    idPauta: 3,
+    duracao: 30,
+    unidade: 'MIN',
+};
+
+export const mockSessoes: SessaoResponseDTO[] = [
     {
-        id: 5,
-        pauta: {
-            id: 5,
-            titulo: "Reforma do Estatuto",
-            descricao: "Proposta de alteração nos artigos 2º e 3º do estatuto.",
-            status: "VOTADA",
-            votosFavor: 3,
-            votosContra: 1,
-            votosTotais: 4,
-            resultado: "APROVADO",
-        },
-        duracao: 5,
-        status: "FINALIZADA",
-        horarioInicio: "19/05/2025 14:00:00",
-        horarioFim: "19/05/2025 14:05:00",
-        votos: [
-            {
-                id: 1,
-                voto: "SIM",
-                associado: {
-                    id: 1,
-                    nome: "João Atualizado",
-                },
-            },
-            {
-                id: 2,
-                voto: "SIM",
-                associado: {
-                    id: 2,
-                    nome: "Maria Souza",
-                },
-            },
-            {
-                id: 3,
-                voto: "SIM",
-                associado: {
-                    id: 3,
-                    nome: "Carlos Lima",
-                },
-            },
-            {
-                id: 4,
-                voto: "NAO",
-                associado: {
-                    id: 4,
-                    nome: "Danielly Marques",
-                },
-            },
-        ],
+        id: 1,
+        pauta: mockPautaResultados[0],
+        duracao: 15,
+        status: 'NAO_INICIADA',
     },
     {
-        id: 4,
-        pauta: {
-            id: 4,
-            titulo: "Revisão do orçamento",
-            descricao: "Discussão sobre a realocação do orçamento anual.",
-            status: "NAO_VOTADA",
-            votosFavor: 0,
-            votosContra: 0,
-            votosTotais: 0,
-            resultado: "EM_ANDAMENTO",
-        },
-        duracao: 300,
-        status: "NAO_INICIADA",
-        horarioInicio: null,
-        horarioFim: null,
-        votos: [],
+        id: 2,
+        pauta: mockPautaResultados[0],
+        duracao: 30,
+        status: 'EM_ANDAMENTO',
     },
     {
         id: 3,
-        pauta: {
-            id: 3,
-            titulo: "Criar um novo artigo",
-            descricao: "Proposta de criação de artigo.",
-            status: "EM_VOTACAO",
-            votosFavor: 2,
-            votosContra: 0,
-            votosTotais: 2,
-            resultado: "EM_ANDAMENTO",
-        },
-        duracao: 5,
-        status: "EM_ANDAMENTO",
-        horarioInicio: "19/05/2025 18:49:12",
-        horarioFim: null,
-        votos: [
-            {
-                id: 2,
-                voto: "SIM",
-                associado: {
-                    id: 1,
-                    nome: "João Atualizado",
-                },
-            },
-            {
-                id: 3,
-                voto: "SIM",
-                associado: {
-                    id: 3,
-                    nome: "Danielly Marques",
-                },
-            },
-        ],
+        pauta: mockPautaResultados[1],
+        duracao: 45,
+        status: 'FINALIZADA',
     },
 ];
+
+
+export const mockSessoesIniciadas: SessaoIniciadaResponseDTO[] = [
+    {
+        id: 2,
+        pauta: mockPautaResultados[0],
+        duracao: 30,
+        status: 'EM_ANDAMENTO',
+        horarioInicio: '2025-06-22T10:00:00Z',
+        horarioFim: null,
+        votos: mockVotos,
+    },
+    {
+        id: 3,
+        pauta: mockPautaResultados[1],
+        duracao: 45,
+        status: 'FINALIZADA',
+        horarioInicio: '2025-06-21T13:00:00Z',
+        horarioFim: '2025-06-21T13:45:00Z',
+        votos: mockVotos,
+    },
+];
+
+export const mockSessaoPage: SessaoPage = {
+    content: mockSessoes,
+    pageable: { pageNumber: 0, pageSize: 10 },
+    totalElements: mockSessoes.length,
+    totalPages: 1,
+    last: true,
+};
+
+export const mockSessaoIniciadaPage: SessaoIniciadaPage = {
+    content: mockSessoesIniciadas,
+    pageable: { pageNumber: 0, pageSize: 10 },
+    totalElements: mockSessoesIniciadas.length,
+    totalPages: 1,
+    last: true,
+};

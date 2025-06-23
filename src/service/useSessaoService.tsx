@@ -17,7 +17,7 @@ function useSessaoService() {
 
     async function cadastrarSessao(
         sessao: SessaoRequestDTO
-    ): Promise< SessaoResponseDTO> {
+    ): Promise<SessaoResponseDTO> {
         const response = await api.post<SessaoResponseDTO | SessaoIniciadaResponseDTO>(url, sessao);
         return response.data;
     }
@@ -27,18 +27,28 @@ function useSessaoService() {
         return response.data;
     }
 
+
     async function listarSessao(
         page: number = 1,
         size: number = 10,
         sortBy: string = "id",
-        direction: "asc" | "desc" = "desc"
+        direction: "asc" | "desc" = "desc",
+        pautaId?: number,
+        status?: 'NAO_INICIADA' | 'EM_ANDAMENTO' | 'FINALIZADA'
     ): Promise<SessaoPage | SessaoIniciadaPage> {
         const response = await api.get<SessaoPage | SessaoIniciadaPage>(url, {
-            params: { page, size, sortBy, direction },
+            params: {
+                page,
+                size,
+                sortBy,
+                direction,
+                ...(pautaId !== undefined && { pautaId }),
+                ...(status && { status }),
+            },
         });
+
         return response.data;
     }
-
     async function atualizarSessao(
         id: number,
         sessao: SessaoRequestDTO
@@ -53,7 +63,7 @@ function useSessaoService() {
 
 
     async function iniciarSessao(id: number): Promise<SessaoIniciadaResponseDTO> {
-        const response = await api.post<SessaoIniciadaResponseDTO>(`${url}/${id}/start`);
+        const response = await api.patch<SessaoIniciadaResponseDTO>(`${url}/${id}/start`);
         return response.data;
     }
 
