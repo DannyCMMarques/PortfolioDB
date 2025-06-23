@@ -2,7 +2,7 @@ import { FiEdit, FiTrash } from "react-icons/fi";
 import InformacaoResumo from "../informacoes_resumo";
 import TagsResumo from "../tags/tagsResumo";
 import type { CardsProps } from "../interfaces/CardsProps";
-import BotaoStatusComponent from "../buttons/BotaoStatusComponent";
+import BotaoStatusComponent from "../buttons";
 
 const Cards = ({
     icon,
@@ -18,6 +18,8 @@ const Cards = ({
     onEditar,
     onExcluir,
     onVerResultados,
+    onIniciarSessao,
+    onParticiparSessao
 }: CardsProps) => {
     const podeEditarOuExcluir =
         status === "NÃO INICIADA" || status === "NÃO VOTADA";
@@ -65,6 +67,9 @@ const Cards = ({
                 isSessao={isSessao ?? false}
                 id={id}
                 onVerResultados={onVerResultados}
+                onIniciarSessao={onIniciarSessao}
+                onParticiparSessao={onParticiparSessao}
+                
             />
         </div>
     );

@@ -1,11 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { IoNewspaper } from "react-icons/io5";
 import { toast } from "react-toastify";
-import usePautaService from "../../../service/usePautaService";
+import { z } from "zod";
 import type { PautaRequestDTO } from "../../../service/interfaces/interfacePauta";
-import { useFormularioEdicao } from "../../../hooks";
+import usePautaService from "../../../service/usePautaService";
 import FormularioBase from "../formulario_base";
 
 
@@ -21,23 +20,19 @@ const schema = z.object({
 });
 
 const FormularioPauta = ({ id, handleClose, onSucesso }: FormularioPautaProps) => {
+
     const pautaService = usePautaService();
 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm<PautaRequestDTO>({
-        resolver: zodResolver(schema),
-        defaultValues: { titulo: "", descricao: "" },
-    });
+    const { register, handleSubmit, formState: { errors } } =
+        useForm<PautaRequestDTO>({
+            resolver: zodResolver(schema),
+            defaultValues: async () => {
+                if (!id) return { titulo: "", descricao: "" };
+                const pauta = await pautaService.getById(id);
+                return { titulo: pauta.titulo, descricao: pauta.descricao };
+            },
+        });
 
-    useFormularioEdicao<PautaRequestDTO>({
-        id,
-        getById: pautaService.getById,
-        reset,
-    });
 
     const onSubmit = async (data: PautaRequestDTO) => {
         try {
