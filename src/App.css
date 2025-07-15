@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'TTSupermolot-Regular';
+    src: url("./assets/fonts/TTSupermolotRegular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TTSupermolot-Bold';
+    src: url("./assets/fonts/TTSupermolotBold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}

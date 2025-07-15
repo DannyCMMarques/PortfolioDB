@@ -1,24 +1,21 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import LateralNav from "./components/menu-lateral";
-import PautasPage from "./pages/Pautas";
-import SessaoPage from "./pages/Sessao";
-import VotacaoPageView from "./pages/votacao";
+import About from "./pages/sobre";
+import Curriculo from "./pages/curriculo";
+import Projetos from './pages/projetos/index';
+import Menu from "./components/menu";
+import Footer from "./components/footer";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex h-screen">
-        <LateralNav />
-
-        <div className="flex-1 overflow-y-auto w-full mr-[0px] ml-[0px] sm:mr-[0px] sm:ml-[0px] px-4 lg:px-0 sm:px-4 mt-[16px]">
-          <Routes>
-            <Route path="/" element={<PautasPage />} />
-            <Route path="/sessao" element={<SessaoPage />} />
-            <Route path="/sessao/:id" element={<VotacaoPageView />} />
-          </Routes>
-        </div>
-      </div>
+      <Menu />
+      <Routes>
+        <Route path="/" element={<About />} />
+        <Route path="/curriculo" element={<Curriculo />} />
+        <Route path="/projetos" element={<Projetos />} />
+      </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

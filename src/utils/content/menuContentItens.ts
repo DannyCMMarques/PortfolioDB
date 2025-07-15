@@ -1,20 +1,20 @@
-import { FaVoteYea } from "react-icons/fa";
-import { TfiAgenda } from "react-icons/tfi";
 import type { MenuItem } from "../interfaces/MenuContentInterface";
+
 const menuContentItens: MenuItem[] = [
   {
+    id: 1,
+    label: "Sobre",
+    link: "/"
+  },
+  {
     id: 2,
-    label: "Pautas",
-    link: "/",
-    icon: TfiAgenda,
-    active: false,
+    label: "Currículo",
+    link: "/curriculo"
   },
   {
     id: 3,
-    label: "Sessões",
-    link: "/sessao",
-    icon: FaVoteYea,
-    active: false,
+    label: "Projetos",
+    link: "/projetos"
   }
 ];
 
