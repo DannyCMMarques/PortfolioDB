@@ -14,11 +14,11 @@ export default function Sobre() {
               Danielly Marques
             </p>
             <p
-  className="break-words text-2xl sm:text-2xl md:text-3xl w-4/5 md:w-2/3 mt-2"
-  style={{ fontFamily: 'TTSupermolot-Regular' }}
->
-  Sou trainee de desenvolvimento de software na DBServer
-</p>
+              className="break-words text-2xl sm:text-2xl md:text-3xl w-4/5 md:w-2/3 mt-2"
+              style={{ fontFamily: 'TTSupermolot-Regular' }}
+            >
+              Sou trainee de desenvolvimento de software na DBServer
+            </p>
           </div>
 
           <div className="mt-7">
