@@ -2,6 +2,8 @@
 
 ✅ **Acesse o portfólio completo aqui:** [https://portfoliodaniellycmm.netlify.app/projetos](https://portfoliodaniellycmm.netlify.app/projetos)
 
+🎨 **Design baseado no layout do Figma:** [Projeto Portfólio - Figma](https://www.figma.com/design/0IPCsTipnZn79DRdRukGMU/Projeto-portif%C3%B3lio?node-id=0-1&p=f&t=sm4rcN5DJVvZsDwh-0)
+
 Este projeto é o meu portfólio pessoal desenvolvido com o objetivo de apresentar de forma clara e objetiva minha trajetória, habilidades e projetos como desenvolvedor.
 
 ## ✨ Funcionalidades
