@@ -1,3 +1,4 @@
+
 export const habilidades = {
     'Front-end': [
         { titulo: 'React', nivel: 5 },
