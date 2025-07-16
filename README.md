@@ -1,54 +1,39 @@
-# React + TypeScript + Vite
+# 📁 portfolio-db
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é o meu portfólio pessoal desenvolvido com o objetivo de apresentar de forma clara e objetiva minha trajetória, habilidades e projetos como desenvolvedor.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O portfólio é dividido em três seções principais:
 
-## Expanding the ESLint configuration
+### 🧑‍💻 Sobre
+Nesta seção, compartilho informações sobre quem sou, minha jornada profissional, o cargo que exerço atualmente e minhas principais **habilidades técnicas**.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 📄 Currículo
+Seção dedicada para visualização do meu currículo.  
+📎 [Clique aqui para visualizar o currículo](https://exemplo.com/seu-curriculo.pdf)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+> Obs: o link abre o currículo diretamente em uma nova aba do navegador.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🚀 Projetos
+Lista dos principais projetos que desenvolvi, contendo:
+- **Título do projeto**
+- **Imagem de capa**
+- **Descrição resumida**
+- **Botão "Acessar"** que redireciona para a página correspondente no GitHub ou outro link relacionado.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Tecnologias utilizadas
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+O projeto foi desenvolvido utilizando:
+
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+
+## 🧪 Testes
+
+Os testes foram criados utilizando a **React Testing Library**, garantindo que os principais componentes e funcionalidades estejam funcionando corretamente.
+
+---
+
+Sinta-se à vontade para visitar o portfólio e conhecer mais sobre meu trabalho!
