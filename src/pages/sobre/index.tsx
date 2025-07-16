@@ -7,33 +7,35 @@ export default function Sobre() {
   return (
     <Container>
       <div className="flex flex-col    lg:flex-row justify-between mt-10 ">
-        {/* Texto principal */}
         <div className="space-y-6 w-full">
           <div>
             <p className="text-4xl font-medium">Olá, meu nome é</p>
-            <p className="text-7xl font-bold  mt-2" style={{ fontFamily: "Roboto Flex" }}>
+            <p className="  sm:text-6xl text-6xl md:text-7xl font-bold  mt-2" style={{ fontFamily: "Roboto Flex" }}>
               Danielly Marques
             </p>
             <p
-              className="text-3xl w-2/3 mt-2"
-              style={{ fontFamily: 'TTSupermolot-Regular' }}
-            >
-              Sou trainee de desenvolvimento de software na DBServer
-            </p>
+  className="break-words text-2xl sm:text-2xl md:text-3xl w-4/5 md:w-2/3 mt-2"
+  style={{ fontFamily: 'TTSupermolot-Regular' }}
+>
+  Sou trainee de desenvolvimento de software na DBServer
+</p>
           </div>
 
-          <div className="mt-28">
+          <div className="mt-7">
             <h2 className="text-4xl font-semibold mb-2">Sobre mim</h2>
-            <p className="text-lg text-[#292929] w-3/5" style={{fontFamily:"Roboto Flex"}}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam urna,
-              euismod at porttitor in, dignissim eu mauris. In sem nibh, viverra eu risus
-              sed, accumsan luctus dui.
+
+            <p className="text-base sm:text-[15px]  md:text-lg text-[#292929] " style={{ fontFamily: "Roboto Flex" }}>
+              Minha jornada na tecnologia começou em 2023, quando iniciei meus estudos em desenvolvimento front-end e descobri uma verdadeira paixão pelo mundo da programação. Antes disso, eu estava em um caminho completamente diferente: cursava Enfermagem na UFV, uma experiência que contribuiu fortemente para o desenvolvimento de soft skills como empatia, cooperação  e relacionamento interpessoal.
+              <p className='mt-3'>
+                Hoje, atuo como trainee em desenvolvimento Full Stack, criando sistemas web e APIs com tecnologias como Java, Spring Boot, TypeScript, React e Docker, além da aplicação de testes unitários e de integração. Estou sempre em busca de evolução técnica e de contribuir com o crescimento de equipes e projetos por onde passo.
+              </p>
             </p>
+
           </div>
         </div>
 
         <div className="w-full flex flex-col items-center">
-          <div className="flex justify-center items-start">
+          <div className="hidden sm:hidden md:flex md:justify-center md:items-start">
             <img
               src={Perfil}
               alt="Foto"

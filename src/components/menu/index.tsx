@@ -4,9 +4,8 @@ import LinkedinIcon from "./../../assets/icone_linkedin.png";
 import Logo from "./../../assets/logo_menu.png";
 export default function Menu() {
     return (
-        <nav className="w-full bg-[#85D4F4] text-[#414ABA] shadow-md">
-            <div className="max-w-6xl mx-auto flex flex-row items-center justify-between p-4 gap-4 flex-wrap">
-                <div className="flex items-center">
+        <nav className="w-full px-4 sm:px-4 md:px-20 bg-[#85D4F4] text-[#414ABA] shadow-md  flex flex-row items-center justify-between">
+                <div className="flex items-center justify-between gap-4 sm:gap-4 md:gap-25">
                     <a
                         href="/">
                         <img
@@ -15,19 +14,18 @@ export default function Menu() {
                             className="h-[60px] w-[60px] md:h-[87px] md:w-[87px] transition-all"
                         />
                     </a>
+
+                    <ul className="flex justify-between md:gap-25 text-center gap-4 sm:gap-4 flex-wrap">
+                        {menuContentItens.map((item) => (
+                            <li key={item.id}>
+                                <a href={item.link} className="hover:underline">
+                                    {item.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-
-                <ul className="flex justify-between gap-5 text-center flex-wrap">
-                    {menuContentItens.map((item) => (
-                        <li key={item.id}>
-                            <a href={item.link} className="hover:underline">
-                                {item.label}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-
-                <div className="flex gap-3">
+                <div className="flex justify-between gap-4 sm:gap-4 md:gap-10">
                     <a href="https://github.com/DannyCMMarques">
                         <img src={GithubIcon} alt="GitHub" className="w-6 h-6" />
                     </a>
@@ -35,7 +33,6 @@ export default function Menu() {
                         <img src={LinkedinIcon} alt="LinkedIn" className="w-6 h-6" />
                     </a>
                 </div>
-            </div>
         </nav>
     );
 }
