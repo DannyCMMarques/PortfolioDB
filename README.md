@@ -1,5 +1,7 @@
 # 📁 portfolio-db
 
+✅ **Acesse o portfólio completo aqui:** [https://portfoliodaniellycmm.netlify.app/projetos](https://portfoliodaniellycmm.netlify.app/projetos)
+
 Este projeto é o meu portfólio pessoal desenvolvido com o objetivo de apresentar de forma clara e objetiva minha trajetória, habilidades e projetos como desenvolvedor.
 
 ## ✨ Funcionalidades
@@ -11,9 +13,6 @@ Nesta seção, compartilho informações sobre quem sou, minha jornada profissio
 
 ### 📄 Currículo
 Seção dedicada para visualização do meu currículo.  
-📎 [Clique aqui para visualizar o currículo](https://exemplo.com/seu-curriculo.pdf)
-
-> Obs: o link abre o currículo diretamente em uma nova aba do navegador.
 
 ### 🚀 Projetos
 Lista dos principais projetos que desenvolvi, contendo:
