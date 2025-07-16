@@ -1,10 +1,7 @@
+import type { HabilidadeProps } from '../interfaces/interfacesComponents';
 import bolinhaCheia from './../../assets/bolinha-cheia.png';
 import bolinhaVazia from './../../assets/bolinha-vazia.png';
 
-interface HabilidadeProps {
-    titulo: string;
-    nivel: number;
-}
 
 export default function Habilidade({ titulo, nivel }: HabilidadeProps) {
     const totalDeBolinhas = 5;

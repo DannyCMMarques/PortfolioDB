@@ -1,13 +1,4 @@
-interface CardProjetoProps {
-  imagem: string;
-  titulo: string;
-  tecnologias: string[];
-  descricao: string;
-  botao: {
-    label: string;
-    url: string;
-  };
-}
+import type { CardProjetoProps } from "../interfaces/interfacesComponents";
 
 export default function CardProjeto({
   imagem,
