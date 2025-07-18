@@ -27,6 +27,7 @@ export default function CardProjeto({
       <div className="mt-auto">
         <a
           href={botao.url}
+          target="_blank" rel="noopener noreferrer"
           className="block bg-[#414ABA] w-full text-white text-sm rounded-md px-4 py-2 font-medium text-center"
         >
           {botao.label}

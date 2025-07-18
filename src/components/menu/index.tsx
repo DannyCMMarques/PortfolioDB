@@ -7,7 +7,8 @@ export default function Menu() {
         <nav className="w-full px-4 sm:px-4 md:px-20 bg-[#85D4F4] text-[#414ABA] shadow-md  flex flex-row items-center justify-between">
                 <div className="flex items-center justify-between gap-4 sm:gap-4 md:gap-25">
                     <a
-                        href="/">
+                        href="https://db.tec.br/"  target="_blank" rel="noopener noreferrer" 
+                        >
                         <img
                             src={Logo}
                             alt="Logo"
@@ -18,7 +19,7 @@ export default function Menu() {
                     <ul className="flex justify-between md:gap-25 text-center gap-4 sm:gap-4 flex-wrap">
                         {menuContentItens.map((item) => (
                             <li key={item.id}>
-                                <a href={item.link} className="hover:underline">
+                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
                                     {item.label}
                                 </a>
                             </li>
@@ -26,10 +27,10 @@ export default function Menu() {
                     </ul>
                 </div>
                 <div className="flex justify-between gap-4 sm:gap-4 md:gap-10">
-                    <a href="https://github.com/DannyCMMarques">
+                    <a href="https://github.com/DannyCMMarques" target="_blank" rel="noopener noreferrer">
                         <img src={GithubIcon} alt="GitHub" className="w-6 h-6" />
                     </a>
-                    <a href="https://br.linkedin.com/in/danny-marques">
+                    <a href="https://br.linkedin.com/in/danny-marques" target="_blank" rel="noopener noreferrer">
                         <img src={LinkedinIcon} alt="LinkedIn" className="w-6 h-6" />
                     </a>
                 </div>
