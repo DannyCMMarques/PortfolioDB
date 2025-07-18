@@ -9,7 +9,7 @@ const menuContentItens: MenuItem[] = [
   {
     id: 2,
     label: "Currículo",
-    link: "/DaniellyMarques-CV-DB.pdf"
+    link: "/CV-DaniellyMarques-DB.pdf"
   },
   {
     id: 3,

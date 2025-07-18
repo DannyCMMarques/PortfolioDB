@@ -1,9 +1,9 @@
 
 export const habilidades = {
     'Front-end': [
-        { titulo: 'React', nivel: 5 },
         { titulo: 'HTML / CSS', nivel: 5 },
         { titulo: 'TypeScript', nivel: 4 },
+        { titulo: 'React', nivel: 4 },
         { titulo: 'Jest', nivel: 4 },
         { titulo: 'React Native', nivel: 3 },
         { titulo: 'Angular', nivel: 3 },
